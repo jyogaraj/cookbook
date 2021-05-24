@@ -1,4 +1,4 @@
-CREATE USER 'wiki'@'localhost' IDENTIFIED BY 'THISpasswordSHOULDbeCHANGED';
+DELETE FROM mysql.user WHERE User='';CREATE USER 'wiki'@'localhost' IDENTIFIED BY 'THISpasswordSHOULDbeCHANGED';
 CREATE DATABASE database_name;
 CREATE DATABASE wikidatabase;  
 GRANT ALL PRIVILEGES ON wikidatabase.* TO 'wiki'@'localhost';
