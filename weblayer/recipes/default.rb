@@ -26,7 +26,7 @@ execute 'clean metadata' do
     command "yum clean metadata"
 end
 
-['php','php-common','php-pear','php-cli','php-pdo','php-fpm','php-json','php-mysqlnd','php-cgi','php-mbstring','php-xml', 'php-zip'].each do |package|
+['php','php-common','php-pear','php-cli','php-fpm','php-json','php-mysqlnd','php-cgi','php-mbstring','php-xml', 'php-zip'].each do |package|
     package "#{package}" do
         retries 3
         retry_delay 5
