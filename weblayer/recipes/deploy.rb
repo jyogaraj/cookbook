@@ -7,10 +7,8 @@ git "/tmp/#{random_string}" do
   action :sync
 end
 
-archive_file "/tmp/#{random_string}/mediawiki-1.35.2.tar.gz" do
-    destination      "/var/www"
-    overwrite        true
-    action           :extract
+execute 'untar archive' do
+    command "tar -zxvf /tmp/#{random_string}/mediawiki-1.35.2.tar.gz -C /var/www/mediawiki-1.35.2"
 end
 
 link '/var/www/mw' do
