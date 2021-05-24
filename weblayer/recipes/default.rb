@@ -4,10 +4,10 @@
 #
 # Copyright:: 2021, The Authors, All Rights Reserved.
 
-package "httpd";do
+package "httpd" do
     retries 3
     retry_delay 5
-]
+end
 
 service 'httpd' do
     action [:enable, :start]
@@ -26,7 +26,7 @@ execute 'clean metadata' do
     command "yum clean metadata"
 end
 
-['php-cli','php-pdo','php-fpm','php-json','php-mysqlnd'].each do |package|
+['php','php-common','php-pear','php-cli','php-pdo','php-fpm','php-json','php-mysqlnd','php-cgi','php-mbstring','php-xml', 'php-zip'].each do |package|
     package "#{package}" do
         retries 3
         retry_delay 5
