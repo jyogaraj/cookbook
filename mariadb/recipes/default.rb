@@ -14,8 +14,12 @@ service "mariadb" do
     action [:enable, :start]
 end
 
-remote_file '/tmp/sqlcommands.sql' do
+cookbook_file  '/tmp/sqlcommands.sql' do
     source 'sqlcommands.sql'
+end
+
+cookbook_file  '/tmp/hardening.sql' do
+    source 'hardening.sql'
 end
 
 execute 'assign root password' do
@@ -24,6 +28,10 @@ execute 'assign root password' do
     only_if "#{node[:mysql][:mysql_bin]} -u root -e 'show databases;'"
 end
 
-execute 'assign root password' do
-    command "#{[:mysql][:mysql_bin]} -u root password \"#{node[:mysql][:server_root_password]}\" < /tmp/sqlcommands.sql"
+execute 'hardening db' do
+    command "#{node[:mysql][:mysql_bin]} -u root -p#{node[:mysql][:server_root_password]} < /tmp/hardening.sql"
+end
+
+execute 'create db for wiki' do
+    command "#{node[:mysql][:mysql_bin]} -u root -p#{node[:mysql][:server_root_password]} < /tmp/sqlcommands.sql"
 end
