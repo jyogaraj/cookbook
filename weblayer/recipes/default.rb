@@ -4,15 +4,6 @@
 #
 # Copyright:: 2021, The Authors, All Rights Reserved.
 
-package "httpd" do
-    retries 3
-    retry_delay 5
-end
-
-service 'httpd' do
-    action [:enable, :start]
-end
-
 package "amazon-linux-extras" do
   retries 3
   retry_delay 5
@@ -26,9 +17,18 @@ execute 'clean metadata' do
     command "yum clean metadata"
 end
 
-['php','php-common','php-pear','php-cli','php-fpm','php-json','php-mysqlnd','php-cgi','php-mbstring','php-xml', 'php-zip'].each do |package|
+['libzip','php-cli','php-common','php-json',' php','libxslt','php-xml','oniguruma','php-mbstring'].each do |package|
     package "#{package}" do
         retries 3
         retry_delay 5
     end
+end
+
+package "httpd" do
+    retries 3
+    retry_delay 5
+end
+
+service 'httpd' do
+    action [:enable, :start]
 end
