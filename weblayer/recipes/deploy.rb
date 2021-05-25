@@ -27,3 +27,12 @@ end
 service "httpd" do
     action [:restart]
 end
+
+template 'mysql configuration' do
+  path '/var/www/mw/LocalSettings.php'
+  source 'LocalSettings.erb'
+  backup false
+  owner 'root'
+  group 'root'
+  mode 0644
+end
