@@ -8,7 +8,7 @@ git "/tmp/#{random_string}" do
 end
 
 execute 'untar archive' do
-    command "tar -zxvf /tmp/#{random_string}/mediawiki-1.35.2.tar.gz -C /var/www/mediawiki-1.35.2"
+    command "tar -zxvf /tmp/#{random_string}/mediawiki-1.35.2.tar.gz -C /var/www"
 end
 
 link '/var/www/mw' do
