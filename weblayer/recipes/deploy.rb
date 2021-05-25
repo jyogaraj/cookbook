@@ -23,3 +23,7 @@ ruby_block "replace document root" do
       fe.write_file
     end
 end
+
+service "httpd" do
+    action [:restart]
+end
